@@ -38,7 +38,6 @@ prompt = ChatPromptTemplate.from_messages(
             5. Tailor Content**: Adapt the depth and complexity of the response to the user's specified needs or implied expertise level.
             6. Use Tools Effectively**: If relevant, analyze provided content (e.g., images, PDFs, text files) or external data (e.g., X user profiles, posts, or linked content) to enhance the response.
             7. Polish Output**: Ensure the response is concise, free of errors, and formatted for clarity, with appropriate headings, bullet points, or tables if needed.
-
             Respond to the user's query with a well-researched, coherent, and professional contribution to the research paper, incorporating any necessary tools or data analysis to meet the user's goals.
             Wrap the output in this format and provide no other text\n{format_instructions}
             """,
