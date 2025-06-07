@@ -14,7 +14,7 @@ class ResearchResponse(BaseModel):
     topic: str
     summary: str
     sources: list[str]
-    #tools_used: list[str]
+    tools_used: list[str]
 
 # Setup LLM
 llm = ChatOpenAI(model="gpt-4.1-mini")
