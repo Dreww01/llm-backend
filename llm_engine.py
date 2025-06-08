@@ -14,7 +14,7 @@ class ResearchResponse(BaseModel):
     topic: str
     summary: str
     sources: list[str]
-    tools_used: list[str]
+    #tools_used: list[str]
 
 # Setup LLM
 llm = ChatOpenAI(model="gpt-4.1-mini")
@@ -59,7 +59,7 @@ agent_executor = AgentExecutor(
     agent=agent,
     tools=[],
     memory=None,
-    verbose=True, # True, if you want to see the thought ptocess in terminal.
+    verbose=False, # True, if you want to see the thought ptocess in terminal.
 )
 
 

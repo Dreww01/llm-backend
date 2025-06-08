@@ -25,7 +25,7 @@ class Prompt(BaseModel):
 def root():
     return {"message": "Hello, Welcome to my LLM"}
 
-@app.post("/generate")
+@app.post("/chat")
 async def generate(prompt: Prompt):
     try:
         raw_response = agent_executor.invoke({"query": prompt.input})
