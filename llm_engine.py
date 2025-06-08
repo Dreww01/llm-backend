@@ -59,7 +59,7 @@ agent_executor = AgentExecutor(
     agent=agent,
     tools=[],
     memory=None,
-    verbose=False,
+    verbose=True,
 )
 
 

@@ -4,10 +4,19 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from llm_engine import agent_executor, parser  # Import agent_executor and parser from llm_engine.py
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or use your frontend URL for more security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Prompt(BaseModel):
     input: str
