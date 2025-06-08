@@ -1,6 +1,6 @@
 # FastAPI main app
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from llm_engine import agent_executor, parser  # Import agent_executor and parser from llm_engine.py
 from dotenv import load_dotenv
@@ -27,10 +27,12 @@ def root():
 
 @app.post("/generate")
 async def generate(prompt: Prompt):
-    # Use the agent_executor to process the input and parser to format the output
     try:
         raw_response = agent_executor.invoke({"query": prompt.input})
+        print("Raw response:", raw_response)
         structured_response = parser.parse(raw_response.get("output"))
-        return {"output": structured_response}
+        print("Structured response:", structured_response)
+        return {"response": structured_response}
     except Exception as e:
-        return {"error": str(e)}
+        print("Error:", e)
+        raise HTTPException(status_code=500, detail=str(e))

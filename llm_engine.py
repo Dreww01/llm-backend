@@ -59,7 +59,7 @@ agent_executor = AgentExecutor(
     agent=agent,
     tools=[],
     memory=None,
-    verbose=True,
+    verbose=True, # True, if you want to see the thought ptocess in terminal.
 )
 
 
