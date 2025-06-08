@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Or use your frontend URL for more security
+    allow_origins=["https://drewgpt.vercel.app/"],  # Or use your frontend URL for more security
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
