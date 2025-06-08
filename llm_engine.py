@@ -17,7 +17,7 @@ class ResearchResponse(BaseModel):
     #tools_used: list[str]
 
 # Setup LLM
-llm = ChatOpenAI(model="gpt-4.1-mini")
+llm = ChatOpenAI(model="gpt-4o-mini")
 
 # Output parser
 parser = PydanticOutputParser(pydantic_object=ResearchResponse)
