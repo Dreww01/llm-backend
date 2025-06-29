@@ -1,13 +1,14 @@
 # LLM logic here
-
-from dotenv import load_dotenv
+import os
+import dotenv
 from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain.memory import ConversationBufferMemory
 
-load_dotenv()
+dotenv.load_dotenv()
 
 # Specify all the fields you want as output from your llm call.
 class ResearchResponse(BaseModel):
@@ -17,10 +18,18 @@ class ResearchResponse(BaseModel):
     #tools_used: list[str]
 
 # Setup LLM
-llm = ChatOpenAI(model="gpt-4.1-mini")
+from pydantic import SecretStr
+
+llm = ChatOpenAI(
+    model="deepseek/deepseek-chat-v3-0324:free",  # OpenRouter model path
+    base_url="https://openrouter.ai/api/v1",  # OpenRouter API endpoint
+    api_key=SecretStr(os.getenv("OPENROUTER_API_KEY") or "")   #  OpenRouter API key from .env
+)
 
 # Output parser
 parser = PydanticOutputParser(pydantic_object=ResearchResponse)
+
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True) 
 
 # Prompt template
 prompt = ChatPromptTemplate.from_messages(
@@ -58,7 +67,7 @@ agent = create_tool_calling_agent(
 agent_executor = AgentExecutor(
     agent=agent,
     tools=[],
-    memory=None,
+    memory=memory,
     verbose=False, # True, if you want to see the thought ptocess in terminal.
 )
 
